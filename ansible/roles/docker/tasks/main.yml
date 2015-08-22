@@ -1,5 +1,5 @@
 ---
 - apt: name=docker.io update_cache=true
 
-- shell: docker pull jupyter/notebook
+- shell: docker pull logston/notebook
 

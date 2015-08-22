@@ -3,8 +3,10 @@
 - hosts: webservers
   any_errors_fatal: True
   sudo: yes
-  roles: 
-    #- docker
-    #- nginx
+  roles:
+    - docker
+    - nginx
     - venv
+    - git
+    - app
 

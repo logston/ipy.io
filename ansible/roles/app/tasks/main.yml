@@ -1,0 +1,7 @@
+---
+- name: Install app dependencies
+  pip: requirements=/srv/ipy/app/requirements.txt
+       virtualenv=/srv/ipy/venv
+       executable=/srv/ipy/venv/bin/pip
+  sudo_user: "{{ app_user }}"
+
