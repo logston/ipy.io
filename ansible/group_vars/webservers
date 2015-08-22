@@ -5,5 +5,7 @@ app_user: "{{ lookup('env', 'IPY_IO_APP_USER') }}"
 app_group: "{{ lookup('env', 'IPY_IO_APP_GROUP') }}"
 app_repo: "{{ lookup('env', 'IPY_IO_APP_REPO') }}"
 
+deploy_directory: "{{ lookup('env', 'IPY_IO_DEPLOY_DIRECTORY') }}"
+
 docker_image: "{{ lookup('env', 'IPY_IO_DOCKER_IMAGE') }}"
 

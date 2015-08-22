@@ -6,7 +6,7 @@
   pip: name=virtualenv
 
 - name: Create app dir
-  file: path=/srv/ipy
+  file: path={{ deploy_directory }}
         state=directory
         mode=0755
         owner={{ app_user }}
@@ -15,6 +15,6 @@
 - name: Create venv
   shell: virtualenv -p /usr/bin/python3 venv
   args:
-    chdir: /srv/ipy
+    chdir: "{{ deploy_directory }}"
   sudo_user: "{{ app_user }}"
 

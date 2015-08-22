@@ -1,6 +1,6 @@
 ---
 - name: Pull code from repository
-  git: repo="{{ app_repo }}" dest=/srv/ipy/repo
+  git: repo="{{ app_repo }}" dest="{{ deploy_directory }}"/repo
   args:
     accept_hostkey: yes
     force: yes
