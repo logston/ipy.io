@@ -1,0 +1,5 @@
+---
+domain_name: "{{ lookup('env', 'IPY_IO_DOMAIN_NAME') }}"
+app_user: "{{ lookup('env', 'IPY_IO_APP_USER') }}"
+app_group: "{{ lookup('env', 'IPY_IO_APP_GROUP') }}"
+
