@@ -2,14 +2,14 @@ from flask import Blueprint, render_template
 
 from . import app
 
-mod = Blueprint('core', __name__, url_prefix='/core')
+bp_container = Blueprint('container', __name__)
 
-@mod.route('/')
+@bp_container.route('/')
 def index():
     return render_template("base.html")
 
 
-@mod.route('/start-container', methods=['GET', 'POST'])
+@bp_container.route('/start-container')
 def start_container():
     return render_template('starting_container.html') 
 

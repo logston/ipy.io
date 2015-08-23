@@ -3,6 +3,6 @@ app = Flask(__name__)
 
 app.config.from_object('config')
 
-from app.views import mod as coreModule
-app.register_blueprint(coreModule)
+from app.views import bp_container
+app.register_blueprint(bp_container)
 
