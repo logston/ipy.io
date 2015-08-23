@@ -8,5 +8,9 @@ server {
   location / {
     proxy_pass    http://localhost:8888;
   }
+
+  location ~ ^/(js|css|img)/.*$ {
+    root  {{ deploy_directory }}/repo/app/static;
+  }
 }
 
