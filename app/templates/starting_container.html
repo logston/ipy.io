@@ -11,7 +11,7 @@
 {% block body_js %}
   <script src="js/check-container-status.js"></script>
   <script>
-    setInterval(containerStatusChecker, 2000, {{ async_result_id }});
+    setInterval(containerStatusChecker, 2000, '{{ async_result_id }}');
   </script>
 {% endblock %}
 

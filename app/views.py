@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, jsonify
 
 from . import app
+from .celery import start_container as async_start_container
 
 bp_container = Blueprint('container', __name__)
 
@@ -11,22 +12,25 @@ def index():
 
 @bp_container.route('/start-container')
 def start_container():
-    context = {
-        'async_result_id': 1
-    }
+    user_id = 1
+    group_id = 1
+
+    async_result = async_start_container.delay(group_id, user_id)
+
+    context = {'async_result_id': async_result.id}
+
     return render_template('starting_container.html', **context)
 
 
 @bp_container.route('/container-startup-status/<async_result_id>')
 def container_startup_status(async_result_id):
-    # get celery task status   
-    import random 
-      
-    done = False if random.random() > 0.2 else True
- 
-    # if task is not done
-    if not done:
-        return jsonify({'href': False})
+    async_result = async_start_container.AsyncResult(async_result_id)
 
-    return jsonify({'href': 'http://plog.logston.me'})
+    if async_result.status == 'FAILURE':
+        return jsonify({'href': '/container-start-failure'})
+      
+    if async_result.status == 'SUCCESS':
+        return jsonify({'href': async_result.result})
+
+    return jsonify({'href': False})
 

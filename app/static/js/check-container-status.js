@@ -16,7 +16,7 @@ function containerStatusChecker(taskId) {
             }
         },
         error: function onError() {
-            alert('Something went wrong');
+            console.log('Something went wrong');
         }
     });
 }

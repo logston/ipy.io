@@ -6,6 +6,7 @@
   roles:
     - docker
     - nginx
+    - redis
     - venv
     - git
     - app
