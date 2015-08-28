@@ -4,6 +4,7 @@
   any_errors_fatal: True
   sudo: yes
   roles:
+    - os
     - docker
     - nginx
     - redis
