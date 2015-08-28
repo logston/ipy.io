@@ -1,4 +1,5 @@
 from celery import Celery
+from docker import Client
 
 from . import app
 
@@ -25,8 +26,12 @@ def start_container(group_id, user_id):
     :return: url of container
     :rtype: str
     """
-    import time
-    time.sleep(5)
+    client = Client(base_url='unix://var/run/docker.sock')
+    container = client.create_container(image='logston/notebook:0.1.3', 
+                                        command='sh -c "jupyter notebook --notebook-dir=/srv"')
+    client.start(container=container.get('Id'))
+    ports = client.port(container.get('Id'), 8888)
+    host_port = ports[0]['HostPort']
    
-    return 'http://plog.logston.me'
+    return 'http://ipy.vg:{}'.format(host_port)
 
