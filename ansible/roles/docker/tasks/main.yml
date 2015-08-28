@@ -1,5 +1,12 @@
 ---
-- apt: name=docker.io update_cache=true
 
-- shell: docker pull logston/notebook
+- apt_repository:
+    repo: 'deb https://get.docker.com/ubuntu docker main'
+    update_cache: yes
+
+- apt:
+    name: lxc-docker
+    cache_valid_time: 600
+
+- shell: docker pull logston/notebook:0.1.3
 
