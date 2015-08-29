@@ -8,7 +8,11 @@ function containerStatusChecker(taskId) {
         statusCode: {
             200: function(res) {
                 if (res.href) {
-                    window.location.href = res.href;
+                    setTimeout(function() {
+                        window.location.href = res.href;
+                    }, 2000);
+                } else {
+                    window.location.href = '/container/404';
                 }
             },
             404: function() {

@@ -34,3 +34,8 @@ def container_startup_status(async_result_id):
 
     return jsonify({'href': False})
 
+
+@bp_container.route('/container-start-failure')
+def container_start_failure():
+    return render_template('container_start_failure.html')
+
