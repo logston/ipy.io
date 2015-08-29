@@ -15,7 +15,7 @@ def start_container():
     user_id = 1
     group_id = 1
 
-    async_result = async_start_container.delay(group_id, user_id)
+    async_result = async_start_container.delay(group_id)
 
     context = {'async_result_id': async_result.id}
 
