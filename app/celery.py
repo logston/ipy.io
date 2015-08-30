@@ -6,6 +6,7 @@ from celery import Celery
 import docker
 
 from . import app
+from .models import Group
 from .utils import EPHEMERAL_PORT_RANGE
 
 
@@ -33,16 +34,21 @@ def start_container(group_id):
     """
     client = docker.Client(base_url=app.config['DOCKER_HOST'])
 
-    # Get group
-    # check if has been stopped or is past its time allotment
-    # check if group has already hit max containers
-    # check if group's file is already in place in temp dir
-    # pull file from cdn and place in group's temp dir
+    group = Group.query.get(group_id)
+    if group.stopped_ts:
+        return 'url_for_closed group'
+
+    if len(group.containers) >= group.max_containers:
+        return 'max containers reached'
+    
+    if not os.path.exists(group.file_path):
+        # pull file from cdn and place in group's temp dir
+        pass
 
     image = app.config['DOCKER_IMAGE']
     notebook_dir = app.config['NOTEBOOK_DIR']
-    group_file = '/tmp/PgBouncerTimingTests.ipynb'
-    docker_read_only_file = os.path.join(notebook_dir, os.path.basename(group_file))
+    docker_read_only_file = os.path.join(notebook_dir, 
+                                         os.path.basename(group.file_path))
     command = 'sh -c "jupyter notebook --notebook-dir={}"'.format(notebook_dir)
     host_port = random.randint(*EPHEMERAL_PORT_RANGE)
     create_container_params = {
@@ -52,7 +58,7 @@ def start_container(group_id):
         'ports': [8888],   # Open port for business
         'host_config': docker.utils.create_host_config(
             binds={
-                group_file: {
+                group.file_path: {
                     'bind': docker_read_only_file,
                     'mode': 'ro',
                 }
@@ -64,17 +70,16 @@ def start_container(group_id):
     container = client.create_container(**create_container_params)
     container_id = container.get('Id')
 
-    # save container id to group/container table
+    db.session.add(Container(group.id, container_id))
+    db.session.commit()
 
     client.start(container=container_id)
 
     time.sleep(1)  # hack to avoid 404's while container starts
 
-    # get group.creator.subdomain
-
     url_parts = {
         'scheme': app.config['SCHEME'],
-        'subdomain': 'test',
+        'subdomain': group.creator.subdomain,
         'domain': app.config['DOMAIN'],
         'port': host_port
     } 
