@@ -1,0 +1,28 @@
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+
+{% extends 'base.html' %}
+
+{% block body_content %}
+
+{% include "security/_messages.html" %}
+
+<div class="row">
+  <div class="small-6 columns small-offset-3">
+    <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+      <fieldset>
+        <legend>Sign In</legend>
+          {{ login_user_form.hidden_tag() }}
+          {{ render_field_with_errors(login_user_form.email) }}
+          {{ render_field_with_errors(login_user_form.password) }}
+          {{ render_field_with_errors(login_user_form.remember) }}
+          {{ render_field(login_user_form.next) }}
+          <input id="submit" class="button" name="submit" type="submit" value="Login">
+      </fieldset>
+    </form>
+    {% include "security/_menu.html" %}
+  </div>
+</div>
+ 
+{% endblock %}
+
+

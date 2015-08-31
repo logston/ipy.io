@@ -39,7 +39,7 @@ class Group(db.Model):
     creator_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     creator = db.relationship('User',
        			      backref=db.backref('groups', lazy='dynamic'))
-    stopped_ts = db.Column(db.DateTime)
+    delete_ts = db.Column(db.DateTime)
     file_path = db.Column(db.String(255))
     max_containers = db.Column(db.Integer, default=1)
 
