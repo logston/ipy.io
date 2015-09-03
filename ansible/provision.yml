@@ -5,6 +5,7 @@
   sudo: yes
   roles:
     - os
+    - postfix
     - docker
     - nginx
     - redis

@@ -1,0 +1,8 @@
+---
+
+- apt: name=mailutils
+
+- copy: src=main.cf dest=/etc/postfix/main.cf
+
+- service: name=postfix state=restarted
+

@@ -3,3 +3,11 @@
 
 - user: name={{ app_user }} groups=docker append=yes
 
+- apt: name=ntp
+
+- service: name=ntp state=stopped
+
+- shell: ntpdate -s time.nist.gov
+
+- service: name=ntp state=started
+
