@@ -21,11 +21,11 @@ SECRET_KEY = 'the-most-secret-thing-ever-more-secret-than-moon-people'
 
 SECURITY_RECOVERABLE = True
 SECURITY_REGISTERABLE = True
-SECURITY_CONFIRM_URL = False
+SECURITY_CONFIRMABLE = False
 
-MAIL_SERVER = 'smtp.example.com'
-MAIL_PORT = 465
-MAIL_USE_SSL = True
-MAIL_USERNAME = 'username'
-MAIL_PASSWORD = 'password'
+MAIL_SERVER = 'localhost'
+MAIL_PORT = 25
+#MAIL_USE_SSL = True
+#MAIL_USERNAME = 'username'
+#MAIL_PASSWORD = 'password'
 
