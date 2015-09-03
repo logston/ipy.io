@@ -19,9 +19,11 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 
 SECRET_KEY = 'the-most-secret-thing-ever-more-secret-than-moon-people'
 
+SECURITY_CHANGEABLE = True
+SECURITY_CONFIRMABLE = True
 SECURITY_RECOVERABLE = True
 SECURITY_REGISTERABLE = True
-SECURITY_CONFIRMABLE = False
+SECURITY_TRACKABLE = True
 
 MAIL_SERVER = 'localhost'
 MAIL_PORT = 25
