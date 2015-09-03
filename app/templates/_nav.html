@@ -2,16 +2,16 @@
   <div class="large-12 columns">
     <div class="nav-bar right">
      <ul class="button-group">
-       <li><a href="#" class="button">Groups</a></li>
-       <li><a href="#" class="button">Settings</a></li>
        {% if current_user.is_authenticated() %}
+         <li><a href="#" class="button">Groups</a></li>
+         <li><a href="#" class="button">Settings</a></li>
          <li><a href="{{ url_for('security.logout') }}" class="button">Sign Out</a></li>
        {% else %}
          <li><a href="{{ url_for('security.login') }}" class="button">Sign In</a></li>
        {% endif %}
       </ul>
     </div>
-    <h1>ipy.io</h1>
+    <h1><a href="/">ipy.io</a></h1>
     <hr/>
   </div>
 </div>
