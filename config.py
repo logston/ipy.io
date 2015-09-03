@@ -25,6 +25,10 @@ SECURITY_RECOVERABLE = True
 SECURITY_REGISTERABLE = True
 SECURITY_TRACKABLE = True
 
+SECURITY_MSG_SUBDOMAIN_NOT_PROVIDED = ('Subdomain not provided.', 'error')
+SECURITY_MSG_INVALID_SUBDOMAIN = ('Invalid subdomain. Subdomain must only contian letters and numbers.', 'error')
+SECURITY_MSG_SUBDOMAIN_ALREADY_ASSOCIATED = ('"%(subdomain)s" is already associated with an account.', 'error')
+
 MAIL_SERVER = 'localhost'
 MAIL_PORT = 25
 #MAIL_USE_SSL = True

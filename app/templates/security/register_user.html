@@ -17,6 +17,7 @@
           {% if register_user_form.password_confirm %}
             {{ render_field_with_errors(register_user_form.password_confirm) }}
           {% endif %}
+          {{ render_field_with_errors(register_user_form.subdomain) }}
           <input id="submit" class="button" name="submit" type="submit" value="Register">
         </fieldset>
       </form>

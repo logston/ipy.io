@@ -13,7 +13,7 @@ from .models import User, Role
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 
 from .security.forms import RegisterForm
-security = Security(app, user_datastore, register_form=RegisterForm)
+security = Security(app, user_datastore, confirm_register_form=RegisterForm)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
